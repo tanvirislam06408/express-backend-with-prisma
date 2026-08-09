@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/user.routes.js'
 import authRoutes from './services/auth/auth.route.js'
-
+import categoryRoutes from './routes/category.routes.js'
 const app = express();
 
 app.use(cors());
@@ -15,7 +15,8 @@ app.get('/', (req, res) => {
 // auth routes
 app.use('/api/auth', authRoutes)
 
-
 app.use('/api/users', userRoutes);
+
+app.use("/api/categories", categoryRoutes);
 
 export default app;
