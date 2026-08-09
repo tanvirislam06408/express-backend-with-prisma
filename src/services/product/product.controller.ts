@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 import {
   createProduct,
@@ -60,10 +60,18 @@ export const getById = async (
   req: Request,
   res: Response
 ) => {
+  const id = req.params.id;
+
+  if (!id || Array.isArray(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid product id",
+      data: null,
+    });
+  }
+
   try {
-    const product = await getProductById(
-      req.params.id
-    );
+    const product = await getProductById(id);
 
     res.status(200).json({
       success: true,
@@ -87,9 +95,19 @@ export const update = async (
   req: Request,
   res: Response
 ) => {
+  const id = req.params.id;
+
+  if (!id || Array.isArray(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid product id",
+      data: null,
+    });
+  }
+
   try {
     const product = await updateProduct(
-      req.params.id,
+      id,
       req.body
     );
 
@@ -115,8 +133,18 @@ export const remove = async (
   req: Request,
   res: Response
 ) => {
+  const id = req.params.id;
+
+  if (!id || Array.isArray(id)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid product id",
+      data: null,
+    });
+  }
+
   try {
-    await deleteProduct(req.params.id);
+    await deleteProduct(id);
 
     res.status(200).json({
       success: true,
