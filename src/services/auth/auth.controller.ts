@@ -1,12 +1,13 @@
 import type { Request, Response } from "express";
 import { loginUser, registerUser } from "./auth.service.js";
+import { validateLogin, validateRegister } from "./auth.validation.js";
 
 export const register = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const user = await registerUser(req.body);
+    const user = await registerUser(validateRegister(req.body));
 
     res.status(201).json({
       success: true,
@@ -33,7 +34,7 @@ export const login = async (
   res: Response
 ) => {
   try {
-    const result = await loginUser(req.body);
+    const result = await loginUser(validateLogin(req.body));
 
     res.status(200).json({
       success: true,
