@@ -1,6 +1,47 @@
 # API Documentation
 
-Base URL: `http://localhost:5000`
+## 🚀 Live Production & Local Base URLs
+
+- **Live Production URL:** `https://express-backend-with-prisma.vercel.app`
+- **Local Development URL:** `http://localhost:5000`
+- **Health Check Endpoint:** `GET /`
+
+---
+
+## 🔑 Demo Testing Credentials
+
+You can use these pre-seeded demo accounts to test authentication and role-protected endpoints on the live deployment:
+
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **ADMIN** | `admin@example.com` | `Admin@123456` |
+| **USER** | `john@example.com` | `User@123456` |
+| **USER** | `jane@example.com` | `User@123456` |
+
+---
+
+## 🧪 Quick Live Testing (cURL Examples)
+
+### 1. Test Server Connection
+```bash
+curl -i https://express-backend-with-prisma.vercel.app/
+```
+
+### 2. Login to get JWT Token
+```bash
+curl -i -X POST https://express-backend-with-prisma.vercel.app/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "john@example.com", "password": "User@123456"}'
+```
+
+### 3. Fetch Live Products
+```bash
+curl -i https://express-backend-with-prisma.vercel.app/api/products
+```
+
+---
+
+## 📋 Response Format & Status Codes
 
 All responses follow a consistent structure:
 
@@ -25,11 +66,12 @@ All responses follow a consistent structure:
 
 **Authentication**
 
-Endpoints marked 🔒 require the JWT token. Pass it as:
+Endpoints marked 🔒 require the JWT token. Pass it in the header as:
 
 ```
 Authorization: Bearer <token>
 ```
+
 
 ---
 
